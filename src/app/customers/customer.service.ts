@@ -25,31 +25,30 @@ export class CustomerService {
     getCustomersList(): AngularFirestoreCollection<Customer> {
         return this.customersRef;
     }
-/*
+
     createCustomer(customer: Customer): void {
-        this.customersRef.push(customer);
-    }
-
-    deleteCustomer(key: string): void {
-        this.customersRef.remove(key).catch(error => this.handleError(error));
-    }
-
-    //!!!
-    updateCustomer(id: string, value: any): void {
-        this.db.object(`${this.dbPath}/${id}`).update(value).catch(error => this.handleError(error));
-    }
-
-
-    getCustomerObj(id): AngularFireObject<Customer> {
-        return this.db.object(`${this.dbPath}/${id}`);
-    }
+        //this.customersRef.push(customer);
+        this.db.collection(this.dbPath).add({'active': customer.active, 'age': customer.age, 'name': customer.name});
+    /*
+        deleteCustomer(key: string): void {
+            this.customersRef.remove(key).catch(error => this.handleError(error))        }
+    /*
+        //!!!
+        updateCustomer(id: string, value: any): void {
+            this.db.object(`${this.dbPath}/${id}`).update(value).catch(error => this.handleError(error));
+        }
 
 
+        getCustomerObj(id): AngularFireObject<Customer> {
+            return this.db.object(`${this.dbPath}/${id}`);
+        }
 
-    deleteAll(): void {
-        this.customersRef.remove().catch(error => this.handleError(error));
-    }
-    */
+
+
+        deleteAll(): void {
+            this.customersRef.remove().catch(error => this.handleError(error));
+        }
+        */
 
     private handleError(error) {
         console.log(error);
