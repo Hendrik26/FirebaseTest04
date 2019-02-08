@@ -2,9 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
-
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 // import { AngularFireModule } from 'angularfire2';
 import { AngularFireModule } from '@angular/fire';
+
 // import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
@@ -27,7 +28,8 @@ import { CreateCustomerComponent } from './customers/create-customer/create-cust
     FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule, // for database
+      AngularFirestoreModule
+    //AngularFireDatabaseModule // for database
   ],
   providers: [],
   bootstrap: [AppComponent]
