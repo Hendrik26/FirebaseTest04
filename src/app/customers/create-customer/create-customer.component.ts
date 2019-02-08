@@ -41,7 +41,7 @@ export class CreateCustomerComponent implements OnInit {
         } else {
             console.log('ngOnInit else');
             console.log('-------------');
-            //this.receiveCustomerObjByKey(this.customerId);
+            this.receiveCustomerObjByKey(this.customerId);
         }
 
     }
@@ -63,7 +63,6 @@ export class CreateCustomerComponent implements OnInit {
         }
     }
 
-/*
 
     newCustomer(): void {
         this.submitted = false;
@@ -71,32 +70,30 @@ export class CreateCustomerComponent implements OnInit {
     }
 
     private receiveCustomerObjByKey(id: string): void {
-        this.customerService.getCustomerObj(id).valueChanges().
-        subscribe(customer => {
+        this.customerService.getCustomerObj(id).valueChanges().subscribe(customer => {
                 this.customer = customer;
             }
         );
         console.log(this.customer);
     }
-*/
+
     save() {
         if (this.receivedCustomerIdError) {
             this.customerService.createCustomer(this.customer);
             this.customer = new Customer();
         } else {
             if (this.customer !== undefined) {
-                // this.updateCustomer();
+                this.updateCustomer();
             }
             this.router.navigateByUrl('customers');
         }
     }
 
-/*
-    //!!!
+
     updateCustomer() {
         this.customerService.updateCustomer(this.customerId, this.customer);
     }
- */
+
     onSubmit() {
         this.submitted = true;
         this.save();
