@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
+
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import {Customer} from './customer';
 import {query} from '@angular/animations';
 import {map} from 'rxjs/operators';
@@ -12,14 +14,18 @@ export class CustomerService {
     private dbPath = '/customers';
     private dbOrder = 'name';
 
-    customersRef: AngularFireList<Customer> = null;
+    customersRef: AngularFirestoreCollection<Customer> = null;
 
-    constructor(private db: AngularFireDatabase) { }
+    constructor(private db: AngularFirestore) { }
 
     queryAllCustomers(): void {
-        this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder));
+        this.customersRef = this.db.collection(this.dbPath);
     }
 
+    getCustomersList(): AngularFirestoreCollection<Customer> {
+        return this.customersRef;
+    }
+/*
     createCustomer(customer: Customer): void {
         this.customersRef.push(customer);
     }
@@ -33,9 +39,6 @@ export class CustomerService {
         this.db.object(`${this.dbPath}/${id}`).update(value).catch(error => this.handleError(error));
     }
 
-    getCustomersList(): AngularFireList<Customer> {
-        return this.customersRef;
-    }
 
     getCustomerObj(id): AngularFireObject<Customer> {
         return this.db.object(`${this.dbPath}/${id}`);
@@ -46,6 +49,7 @@ export class CustomerService {
     deleteAll(): void {
         this.customersRef.remove().catch(error => this.handleError(error));
     }
+    */
 
     private handleError(error) {
         console.log(error);

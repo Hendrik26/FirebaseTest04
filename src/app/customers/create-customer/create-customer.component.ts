@@ -30,6 +30,23 @@ export class CreateCustomerComponent implements OnInit {
     ) {
     }
 
+
+    ngOnInit() {
+        //this.customerService.receiveAllCustomers();
+        //this.receivedCustomerIdError = !this.hasReceivedCustomerId();
+        console.log('this.receivedCustomerIdError===' + this.receivedCustomerIdError);
+        console.log('------------');
+/*
+        if (this.receivedCustomerIdError) {
+            this.customer = new Customer();
+        } else {
+            console.log('ngOnInit else');
+            console.log('-------------');
+            //this.receiveCustomerObjByKey(this.customerId);
+        }
+*/
+    }
+/*
     private hasReceivedCustomerId(): // can NOT be deleted
         boolean {
         console.log('private method hasReceivedCustomerId()');
@@ -47,21 +64,7 @@ export class CreateCustomerComponent implements OnInit {
         }
     }
 
-    ngOnInit() {
-        //this.customerService.receiveAllCustomers();
-        this.receivedCustomerIdError = !this.hasReceivedCustomerId();
-        console.log('this.receivedCustomerIdError===' + this.receivedCustomerIdError);
-        console.log('------------');
 
-        if (this.receivedCustomerIdError) {
-            this.customer = new Customer();
-        } else {
-            console.log('ngOnInit else');
-            console.log('-------------');
-            this.receiveCustomerObjByKey(this.customerId);
-        }
-
-    }
 
     newCustomer(): void {
         this.submitted = false;
@@ -99,4 +102,5 @@ export class CreateCustomerComponent implements OnInit {
         this.submitted = true;
         this.save();
     }
+    */
 }

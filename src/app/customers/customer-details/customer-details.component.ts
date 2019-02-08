@@ -16,7 +16,7 @@ export class CustomerDetailsComponent implements OnInit {
 
   ngOnInit() {
   }
-
+/*
   updateActive(isActive: boolean) {
     this.customerService.updateCustomer(this.customer.key, { active: isActive });
   }
@@ -24,4 +24,5 @@ export class CustomerDetailsComponent implements OnInit {
   deleteCustomer() {
     this.customerService.deleteCustomer(this.customer.key);
   }
+  */
 }

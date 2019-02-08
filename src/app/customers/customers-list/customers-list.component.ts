@@ -15,23 +15,24 @@ export class CustomersListComponent implements OnInit {
   constructor(private customerService: CustomerService) { }
 
   ngOnInit() {
-    this.customerService.queryAllCustomers();
+   this.customerService.queryAllCustomers();
     this.getCustomersList();
   }
 
-  getCustomersList() {
-    // Use snapshotChanges().map() to store the key
-    this.customerService.getCustomersList().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    ).subscribe(customers => {
-      this.customers = customers;
-    });
-  }
-
-  deleteCustomers() {
-    this.customerService.deleteAll();
-  }
+      getCustomersList() {
+        // Use snapshotChanges().map() to store the key
+        this.customerService.getCustomersList().snapshotChanges().pipe(
+          map(changes =>
+            changes.map(c => ({ key: c.payload.doc.id, ...c.payload.doc.data() }))
+          )
+        ).subscribe(customers => {
+          this.customers = customers;
+        });
+      }
+    /*
+      deleteCustomers() {
+        this.customerService.deleteAll();
+      }
+      */
 
 }
