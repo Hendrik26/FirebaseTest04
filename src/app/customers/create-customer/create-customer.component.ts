@@ -1,12 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-
-import {FormsModule} from '@angular/forms';
-
 import {Customer} from '../customer';
 import {CustomerService} from '../customer.service';
-import {map} from 'rxjs/operators';
 
 
 @Component({
@@ -17,7 +13,7 @@ import {map} from 'rxjs/operators';
 export class CreateCustomerComponent implements OnInit {
 
     customer: Customer = new Customer();
-    customers: any;
+    //customers: any;
     customerId: string;
     submitted = false;
     receivedCustomerIdError = true;
@@ -38,6 +34,7 @@ export class CreateCustomerComponent implements OnInit {
 
         if (this.receivedCustomerIdError) {
             this.customer = new Customer();
+            this.customer.active = true;
         } else {
             console.log('ngOnInit else');
             console.log('-------------');
@@ -67,6 +64,7 @@ export class CreateCustomerComponent implements OnInit {
     newCustomer(): void {
         this.submitted = false;
         this.customer = new Customer();
+        this.customer.active = true;
     }
 
     private receiveCustomerObjByKey(id: string): void {
@@ -74,10 +72,11 @@ export class CreateCustomerComponent implements OnInit {
                 this.customer = customer;
             }
         );
-        console.log(this.customer);
+
     }
 
     save() {
+        console.log(this.customer);
         if (this.receivedCustomerIdError) {
             this.customerService.createCustomer(this.customer);
             this.customer = new Customer();
@@ -91,6 +90,7 @@ export class CreateCustomerComponent implements OnInit {
 
 
     updateCustomer() {
+        console.log(this.customer);
         this.customerService.updateCustomer(this.customerId, this.customer);
     }
 

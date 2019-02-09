@@ -1,11 +1,23 @@
 <h1>Customers</h1>
-<!--div>
-  Anz Customer: {{customers.length}}<br>
-  Ende<br>
-</div-->
-<div *ngFor="let customer of customers" style="width: 300px;">
-  <customer-details [customer]='customer'></customer-details>
+<div class="flex-container">
+    <div>sort by<br>
+        <select [(ngModel)]="sortOrder" (ngModelChange)="orderChange($event)">
+            <option value="name" selected>name</option>
+            <option value="age">age</option>
+        </select>
+        <select [(ngModel)]="sortDir" (ngModelChange)="orderChange($event)">
+            <option value="asc" selected>ascending</option>
+            <option value="desc">descanding</option>
+        </select>
+    </div>
+    <div>min age<br>
+        <input type="number" class="form-control" id="age" required [(ngModel)]="minage" name="min age">
+    </div>
+
+</div>
+<div *ngFor="let customer of customers" style="width: 100%;">
+    <customer-details [customer]='customer'></customer-details>
 </div>
 <div style="margin-top:20px;">
-  <button type="button" class="button btn-danger" (click)='deleteCustomers()'>Delete All</button>
+    <button type="button" class="button btn-danger" (click)='deleteAllCustomers()'>Delete All</button>
 </div>

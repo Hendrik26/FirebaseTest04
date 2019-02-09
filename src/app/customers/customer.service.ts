@@ -1,10 +1,6 @@
 import {Injectable} from '@angular/core';
-import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
-
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Customer} from './customer';
-import {query} from '@angular/animations';
-import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -12,18 +8,18 @@ import {map} from 'rxjs/operators';
 export class CustomerService {
 
     private dbPath = '/customers';
-    private dbOrder = 'name';
 
     customersRef: AngularFirestoreCollection<Customer> = null;
 
     constructor(private db: AngularFirestore) {
     }
 
-    getCustomersList(): AngularFirestoreCollection<Customer> {
-        return this.customersRef = this.db.collection(this.dbPath, ref => ref.orderBy(this.dbOrder));
+    getCustomersList(dbOrder, orderDir, minage): AngularFirestoreCollection<Customer> {
+        return this.customersRef = this.db.collection(this.dbPath, ref => ref.orderBy(dbOrder, orderDir));
     }
 
-    createCustomer(customer: Customer): void {
+        createCustomer(customer: Customer): void {
+
         this.db.collection(this.dbPath).add({
             'active': customer.active,
             'age': customer.age,
@@ -49,16 +45,12 @@ export class CustomerService {
 
     updateCustomer(id: string, customer: Customer): void {
         this.db.doc(`${this.dbPath}/${id}`).update({
+            'active': customer.active,
             'age': customer.age,
             'name': customer.name
-        }).catch(error => this.handleError(error));
+    }).
+        catch(error => this.handleError(error));
     }
-
-          deleteAll(): void {
-              //this.customersRef.remove().catch(error => this.handleError(error));
-              //this.db.collection(this.dbPath).
-          }
-
 
     private handleError(error) {
         console.log(error);
