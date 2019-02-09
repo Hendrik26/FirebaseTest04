@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Angular-Firebase Demo';
-  description = 'Testbeispiel Angular 6 - Firebase 5';
+  description = 'Testbeispiel Angular 6 - Firebase 5 - cloud firestore database';
 }

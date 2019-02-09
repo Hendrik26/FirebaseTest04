@@ -56,7 +56,7 @@ export class CustomerService {
 
           deleteAll(): void {
               //this.customersRef.remove().catch(error => this.handleError(error));
-              this.db.collection(this.dbPath).
+              //this.db.collection(this.dbPath).
           }
 
 
