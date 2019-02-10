@@ -16,10 +16,10 @@ export class CustomerService {
 
     getCustomersList(dbOrder, orderDir, minage): AngularFirestoreCollection<Customer> {
         return this.customersRef = this.db.collection(this.dbPath, ref => ref.orderBy(dbOrder, orderDir));
+        //return this.customersRef = this.db.collection(this.dbPath, ref => ref.orderBy('age').startAt(minage) where('age', '==' , 22));
     }
 
-        createCustomer(customer: Customer): void {
-
+    createCustomer(customer: Customer): void {
         this.db.collection(this.dbPath).add({
             'active': customer.active,
             'age': customer.age,
@@ -48,8 +48,7 @@ export class CustomerService {
             'active': customer.active,
             'age': customer.age,
             'name': customer.name
-    }).
-        catch(error => this.handleError(error));
+        }).catch(error => this.handleError(error));
     }
 
     private handleError(error) {
