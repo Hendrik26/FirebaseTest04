@@ -12,28 +12,46 @@ export class CustomersListComponent implements OnInit {
 
     customers: Customer[];
     sortOrder = 'name';
-    sortDir = 'asc';
+    sortDir = '1';
     minage = 0;
+    maxage = 100000;
+
+    public static compareCustomerByName(customer1: Customer, customer2: Customer): number {
+        if (customer1.name.trim().toLowerCase() < customer2.name.trim().toLowerCase()) {
+            return -1;
+        }
+        return 1;
+    }
 
     constructor(private customerService: CustomerService) {
     }
 
     ngOnInit() {
-        this.getCustomersList('name', 'asc', 0);
+        this.getCustomersList('asc', this.minage, this.maxage);
     }
 
     orderChange() {
-        this.getCustomersList(this.sortOrder, this.sortDir, this.minage);
+        if (this.sortDir === '1') {
+            this.getCustomersList('asc', this.minage, this.maxage);
+        } else {
+            this.getCustomersList('desc', this.minage, this.maxage);
+        }
     }
 
-    getCustomersList(sortOrder, orderDir, minage) {
+    getCustomersList(sortDirStr, minage, maxage) {
         // Use snapshotChanges().map() to store the key
-        this.customerService.getCustomersList(sortOrder, orderDir, minage).snapshotChanges().pipe(
+        this.customerService.getCustomersList(sortDirStr, minage, maxage).snapshotChanges().pipe(
             map(changes =>
                 changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
             )
         ).subscribe(customers => {
             this.customers = customers;
+            if (this.sortOrder === 'name') {
+                const sortDirNum = Number(this.sortDir);
+                this.customers.sort(function (a, b) {
+                    return sortDirNum *  CustomersListComponent.compareCustomerByName(a, b);
+                });
+            }
         });
     }
 
@@ -44,6 +62,4 @@ export class CustomersListComponent implements OnInit {
             }
         }
     }
-
-
 }

@@ -14,10 +14,13 @@ export class CustomerService {
     constructor(private db: AngularFirestore) {
     }
 
-    getCustomersList(dbOrder, orderDir, minage): AngularFirestoreCollection<Customer> {
-        return this.customersRef = this.db.collection(this.dbPath, ref => ref.orderBy(dbOrder, orderDir));
-        //return this.customersRef = this.db.collection(this.dbPath, ref => ref.orderBy('age').startAt(minage) where('age', '==' , 22));
+    getCustomersList(sortDirStr, dbMinage, dbMaxage): AngularFirestoreCollection<Customer> {
+        console.log(sortDirStr);
+        this.customersRef = this.db.collection(this.dbPath,
+                ref => ref.orderBy('age', sortDirStr).where('age', '>=', dbMinage).where('age', '<=', dbMaxage));
+        return this.customersRef;
     }
+
 
     createCustomer(customer: Customer): void {
         this.db.collection(this.dbPath).add({
