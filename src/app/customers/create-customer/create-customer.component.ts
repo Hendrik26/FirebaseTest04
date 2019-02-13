@@ -68,7 +68,7 @@ export class CreateCustomerComponent implements OnInit {
     }
 
     private receiveCustomerObjByKey(id: string): void {
-        this.customerService.getCustomerObj(id).valueChanges().subscribe(customer => {
+        this.customerService.getCustomerObj(id).subscribe(customer => {
                 this.customer = customer;
             }
         );

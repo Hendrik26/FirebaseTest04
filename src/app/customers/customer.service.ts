@@ -42,8 +42,8 @@ export class CustomerService {
     }
 
 
-    getCustomerObj(id): AngularFirestoreDocument<Customer> {
-        return this.db.doc(`${this.dbPath}/${id}`);
+    getCustomerObj(id): Observable<any> {
+        return this.db.doc(`${this.dbPath}/${id}`).valueChanges();
     }
 
     updateCustomerActive(id: string, active: boolean): void {
