@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Customer} from './customer';
-
-//////////
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -16,11 +16,15 @@ export class CustomerService {
     constructor(private db: AngularFirestore) {
     }
 
-    getCustomersList(sortDirStr, dbMinage, dbMaxage): AngularFirestoreCollection<Customer> {
+    getCustomersList(sortDirStr, dbMinage, dbMaxage): Observable<any> {
         console.log(sortDirStr);
         this.customersRef = this.db.collection(this.dbPath,
                 ref => ref.orderBy('age', sortDirStr).where('age', '>=', dbMinage).where('age', '<=', dbMaxage));
-        return this.customersRef;
+        return this.customersRef.snapshotChanges().pipe(
+            map(changes =>
+                changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
+            )
+        );
     }
 
 

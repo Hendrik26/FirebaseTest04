@@ -40,11 +40,7 @@ export class CustomersListComponent implements OnInit {
 
     getCustomersList(sortDirStr, minage, maxage) {
         // Use snapshotChanges().map() to store the key ////
-        this.customerService.getCustomersList(sortDirStr, minage, maxage).snapshotChanges().pipe(
-            map(changes =>
-                changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
-            )
-        ).subscribe(customers => {
+        this.customerService.getCustomersList(sortDirStr, minage, maxage).subscribe(customers => {
             this.customers = customers;
             if (this.sortOrder === 'name') {
                 const sortDirNum = Number(this.sortDir);
