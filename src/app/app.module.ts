@@ -15,13 +15,15 @@ import { AppComponent } from './app.component';
 import { CustomersListComponent } from './customers/customers-list/customers-list.component';
 import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
 import { CreateCustomerComponent } from './customers/create-customer/create-customer.component';
+import { CarDetailsComponent } from './customers/car-details/car-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersListComponent,
     CustomerDetailsComponent,
-    CreateCustomerComponent
+    CreateCustomerComponent,
+    CarDetailsComponent
   ],
   imports: [
     BrowserModule,
