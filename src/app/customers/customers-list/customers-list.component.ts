@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {map} from 'rxjs/operators';
+import {Car} from '../car';
 import {Customer} from '../customer';
 import {CustomerService} from '../customer.service';
 
@@ -10,13 +11,24 @@ import {CustomerService} from '../customer.service';
 })
 export class CustomersListComponent implements OnInit {
 
+    cars: Car[];
     customers: Customer[];
     sortOrder = 'name';
+    sortOrderCars = 'type';
     sortDir = '1';
     minage = 0;
     maxage = 100000;
+    minHorsepower = 0;
+    maxHorsepower = 100000;
 
-    public static compareCustomerByName(customer1: Customer, customer2: Customer): number {
+    private static compareCarsByType(car1: Car, car2: Car): number {
+        if (car1.type.trim().toLowerCase() < car2.type.trim().toLowerCase()) {
+            return -1;
+        }
+        return 1;
+    }
+
+    private static compareCustomersByName(customer1: Customer, customer2: Customer): number {
         if (customer1.name.trim().toLowerCase() < customer2.name.trim().toLowerCase()) {
             return -1;
         }
@@ -28,13 +40,16 @@ export class CustomersListComponent implements OnInit {
 
     ngOnInit() {
         this.getCustomersList('asc', this.minage, this.maxage);
+        this.getCarsList('asc', this.minHorsepower, this.maxHorsepower);
     }
 
     orderChange() {
         if (this.sortDir === '1') {
             this.getCustomersList('asc', this.minage, this.maxage);
+            this.getCarsList('asc', this.minHorsepower, this.maxHorsepower);
         } else {
             this.getCustomersList('desc', this.minage, this.maxage);
+            this.getCarsList('desc', this.minHorsepower, this.maxHorsepower);
         }
     }
 
@@ -45,7 +60,20 @@ export class CustomersListComponent implements OnInit {
             if (this.sortOrder === 'name') {
                 const sortDirNum = Number(this.sortDir);
                 this.customers.sort(function (a, b) {
-                    return sortDirNum *  CustomersListComponent.compareCustomerByName(a, b);
+                    return sortDirNum *  CustomersListComponent.compareCustomersByName(a, b);
+                });
+            }
+        });
+    }
+
+    getCarsList(sortDirStr, minHorsepower, maxHorsepower) {
+        // Use snapshotChanges().map() to store the key ////
+        this.customerService.getCarsList(sortDirStr, minHorsepower, maxHorsepower).subscribe(cars => {
+            this.cars = cars;
+            if (this.sortOrderCars === 'type') {
+                const sortDirNum = Number(this.sortDir);
+                this.cars.sort(function (a, b) {
+                    return sortDirNum *  CustomersListComponent.compareCarsByType(a, b);
                 });
             }
         });

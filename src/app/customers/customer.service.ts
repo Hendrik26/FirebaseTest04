@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Customer} from './customer';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -10,16 +10,19 @@ import {Observable} from 'rxjs';
 export class CustomerService {
 
     private dbPath = '/customers';
+    private dbPathCars = '/cars';
 
+    carsRef: AngularFirestoreCollection<Customer> = null;
     customersRef: AngularFirestoreCollection<Customer> = null;
 
     constructor(private db: AngularFirestore) {
     }
 
     getCustomersList(sortDirStr, dbMinage, dbMaxage): Observable<any> {
-        console.log(sortDirStr); //////
+        console.log(sortDirStr);
         this.customersRef = this.db.collection(this.dbPath,
-                ref => ref.orderBy('age', sortDirStr).where('age', '>=', dbMinage).where('age', '<=', dbMaxage));
+                ref => ref.orderBy('age', sortDirStr).where('age', '>=', dbMinage)
+                    .where('age', '<=', dbMaxage));
         return this.customersRef.snapshotChanges().pipe(
             map(changes =>
                 changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
@@ -27,7 +30,18 @@ export class CustomerService {
         );
     }
 
-    /////
+    getCarsList(sortDirStr, dbMinHorsepower, dbMaxHorsepower): Observable<any> {
+        console.log(sortDirStr);
+        this.carsRef = this.db.collection(this.dbPathCars,
+                ref => ref.orderBy('horsepower', sortDirStr).where('horsepower', '>=', dbMinHorsepower)
+                    .where('horsepower', '<=', dbMaxHorsepower));
+        return this.carsRef.snapshotChanges().pipe(
+            map(changes =>
+                changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
+            )
+        );
+    }
+
     createCustomer(customer: Customer): void {
         this.db.collection(this.dbPath).add({
             'active': customer.active,
