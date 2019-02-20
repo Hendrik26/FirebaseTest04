@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+// import { Component, OnInit } from '@angular/core';
+
+import {Component, OnInit, Input} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Car} from '../car';
+import {Customer} from '../customer';
+import {CustomerService} from '../customer.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-car-details',
@@ -7,9 +14,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarDetailsComponent implements OnInit {
 
-  constructor() { }
+    @Input() car: Car;
 
-  ngOnInit() {
-  }
+    constructor(private customerService: CustomerService,
+                private router: Router) {
+    }
 
+    ngOnInit() {
+    }
+  ///////////////////
 }
