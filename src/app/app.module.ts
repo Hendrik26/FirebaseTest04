@@ -29,7 +29,7 @@ import { CreateCustomerComponent } from './customers/create-customer/create-cust
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
       AngularFirestoreModule
-    //AngularFireDatabaseModule // for database
+    // AngularFireDatabaseModule // for database
   ],
   providers: [],
   bootstrap: [AppComponent]
