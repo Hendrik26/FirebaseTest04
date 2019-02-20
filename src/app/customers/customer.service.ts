@@ -17,7 +17,7 @@ export class CustomerService {
     }
 
     getCustomersList(sortDirStr, dbMinage, dbMaxage): Observable<any> {
-        console.log(sortDirStr);
+        console.log(sortDirStr); //////
         this.customersRef = this.db.collection(this.dbPath,
                 ref => ref.orderBy('age', sortDirStr).where('age', '>=', dbMinage).where('age', '<=', dbMaxage));
         return this.customersRef.snapshotChanges().pipe(
