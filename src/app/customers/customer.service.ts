@@ -20,6 +20,7 @@ export class CustomerService {
 
     getCustomersList(sortDirStr, dbMinage, dbMaxage): Observable<any> {
         console.log(sortDirStr);
+        console.log('Method CustomerService.getCustomersList() started!!!');
         this.customersRef = this.db.collection(this.dbPath,
                 ref => ref.orderBy('age', sortDirStr).where('age', '>=', dbMinage)
                     .where('age', '<=', dbMaxage));
@@ -28,13 +29,15 @@ export class CustomerService {
                 changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
             )
         );
+        // console.log('Method CustomerService.getCustomersList() done!!!');
     }
 
     getCarsList(sortDirStr, dbMinHorsepower, dbMaxHorsepower): Observable<any> {
         console.log(sortDirStr);
+        console.log('Method CustomerService.getCarsList() started!!!');
         this.carsRef = this.db.collection(this.dbPathCars,
-                ref => ref.orderBy('horsepower', sortDirStr).where('horsepower', '>=', dbMinHorsepower)
-                    .where('horsepower', '<=', dbMaxHorsepower));
+                ref => ref.orderBy('horsepower', sortDirStr) // .where('horsepower', '>=', dbMinHorsepower));
+                    .where('horsepower', '<=', /* dbMaxHorsepower */ 1000)); // Fehlerqwuelle hier
         return this.carsRef.snapshotChanges().pipe(
             map(changes =>
                 changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))

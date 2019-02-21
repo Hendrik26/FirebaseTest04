@@ -18,10 +18,20 @@
     </div>
 
 </div>
+<div>
+    <br>------------------------------------------------------------------------------------<br>
+    Anzahl Customer: {{customers.length}}
+    <br>------------------------------------------------------------------------------------<br>
+</div>
 <div *ngFor="let customer of customers" style="width: 100%;">
     <customer-details [customer]='customer'></customer-details>
 </div>
 <div>
+    <br>------------------------------------------------------------------------------------<br>
+    <h1>
+        car-details works!
+    </h1>
+    Anzahl Cars: {{cars.length}}
     <br>------------------------------------------------------------------------------------<br>
 </div>
 <div *ngFor="let car of cars" style="width: 100%;">
