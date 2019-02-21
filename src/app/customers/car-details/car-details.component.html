@@ -1,3 +1,33 @@
-<p>
+<h1>
   car-details works!
-</p>
+</h1>
+
+<div *ngIf="car">
+  <div>
+    <div class="flex-container">
+      <div>
+        <label>Key: </label> {{car.key}}
+      </div>
+      <div>
+        <label>Name: </label> {{car.type}}
+      </div>
+      <div>
+        <label>Age: </label> {{car.horsepower}}
+      </div>
+      <div>
+        <label>Active: </label> {{car.color}}
+      </div>
+    </div>
+  </div>
+  <!-- span class="button is-small btn-primary" *ngIf='customer.active' (click)='updateActive(false)'>Inactive</span -->
+
+  <!-- span class="button is-small btn-primary" *ngIf='!customer.active' (click)='updateActive(true)'>Active</span -->
+  &nbsp;
+  <!-- span class="button is-small btn-primary" (click)='updateCustomer()'>Update</span-- >
+  &nbsp;
+  <!-- span class="button is-small btn-danger" (click)='deleteCustomer()'>Delete</span -->
+
+
+  <hr/>
+
+</div>
