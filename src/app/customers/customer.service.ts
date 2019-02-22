@@ -33,6 +33,7 @@ export class CustomerService {
     }
 
     getCarsList(sortDirStr, dbMinHorsepower, dbMaxHorsepower): Observable<any> {
+        // Fehlerquelle in dieser Methode
         console.log(sortDirStr);
         console.log('Method CustomerService.getCarsList() started!!!');
         this.carsRef = this.db.collection(this.dbPathCars,
