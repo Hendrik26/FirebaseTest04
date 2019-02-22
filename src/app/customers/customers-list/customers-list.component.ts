@@ -12,7 +12,9 @@ import {CustomerService} from '../customer.service';
 export class CustomersListComponent implements OnInit {
 
     cars: Car[];
+    carsCombined: Car[];
     customers: Customer[];
+    customersCombined: Customer[];
     sortOrder = 'name';
     sortOrderCars = 'type';
     sortDir = '1';
@@ -41,15 +43,18 @@ export class CustomersListComponent implements OnInit {
     ngOnInit() {
         this.getCustomersList('asc', this.minage, this.maxage);
         this.getCarsList('asc', this.minHorsepower, this.maxHorsepower);
+        this.getCarsByCustomersList('asc', this.minage, this.maxage,this.minHorsepower, this.maxHorsepower);
     }
 
     orderChange() {
         if (this.sortDir === '1') {
             this.getCustomersList('asc', this.minage, this.maxage);
             this.getCarsList('asc', this.minHorsepower, this.maxHorsepower);
+            this.getCarsByCustomersList('asc', this.minage, this.maxage,this.minHorsepower, this.maxHorsepower);
         } else {
             this.getCustomersList('desc', this.minage, this.maxage);
             this.getCarsList('desc', this.minHorsepower, this.maxHorsepower);
+            this.getCarsByCustomersList('desc', this.minage, this.maxage,this.minHorsepower, this.maxHorsepower);
         }
     }
 
@@ -77,6 +82,14 @@ export class CustomersListComponent implements OnInit {
                 });
             }
         });
+    }
+
+    getCarsByCustomersList(sortDirStr, dbMinage, dbMaxage, dbMinHorsepower, dbMaxHorsepower): void {
+        this.customerService.getCarsByCustomersList(sortDirStr, dbMinage, dbMaxage, dbMinHorsepower, dbMaxHorsepower)
+            .subscribe(([customers, cars]) => {
+                this.customersCombined = customers;
+                this.carsCombined = cars;
+            });
     }
 
     deleteAllCustomers() {
