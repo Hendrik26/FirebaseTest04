@@ -33,11 +33,12 @@ export class CustomerService {
     }
 
     getCarsList(sortDirStr, dbMinHorsepower, dbMaxHorsepower): Observable<any> {
+        // Fehlerquelle in dieser Methode
         console.log(sortDirStr);
         console.log('Method CustomerService.getCarsList() started!!!');
         this.carsRef = this.db.collection(this.dbPathCars,
                 ref => ref.orderBy('horsepower', sortDirStr) // .where('horsepower', '>=', dbMinHorsepower));
-                    .where('horsepower', '<=', /* dbMaxHorsepower */ 1000)); // Fehlerqwuelle hier
+                    .where('horsepower', '<=', /* dbMaxHorsepower */ 1000)); // Fehlerquelle hier ////
         return this.carsRef.snapshotChanges().pipe(
             map(changes =>
                 changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
