@@ -3,5 +3,10 @@ export class Customer {
     name: string;
     age: number;
     active = true;
-    cars: string[];
+    // cars: string[];
+    car: any;
+
+    /* public normalize(): void {
+        if ((typeof this.cars) === 'string'){};
+    } */
 }
