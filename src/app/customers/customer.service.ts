@@ -1,3 +1,4 @@
+// use Cloud Firestore
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 
@@ -11,7 +12,7 @@ import {Observable, combineLatest} from 'rxjs';
 export class CustomerService {
 
     private dbPath = '/customers';
-    private dbPathCars = '/cars';
+    private dbPathCars = '/car';
     private carsList: Observable<any>;
     private customersList: Observable<any>;
     private carsByCustomersList: Observable<any>;
