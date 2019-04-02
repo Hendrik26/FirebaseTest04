@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {map} from 'rxjs/operators';
 import {Car} from '../car';
 import {Customer} from '../customer';
 import {CustomerService} from '../customer.service';
@@ -98,5 +97,12 @@ export class CustomersListComponent implements OnInit {
                 this.customerService.deleteCustomer(this.customers[i].key);
             }
         }
+    }
+
+    public hhLength(): number {
+        // return -3;
+        // return this.customers.length;
+        // return Customer.myLength(this.customers);
+        return Customer.myLength01(this.customers);
     }
 }
