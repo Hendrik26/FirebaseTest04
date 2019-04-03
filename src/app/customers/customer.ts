@@ -26,6 +26,28 @@ export class Customer {
         return -4;
     }
 
+    public static myLength02(customers: Customer[]): number {
+        let l: number;
+        l = -2;
+        l = 0;
+        // let x;
+        for (var x in customers) {
+            l += 1;
+        }
+        return l;
+    }
+    public static myLength03(customers: Customer[]): number {
+        let l: number;
+        l = -2;
+        l = 0;
+        // let x;
+        for (let x of customers) {
+            l += 1;
+            // console.log('customer<< ' + x + ' >>')
+        }
+        return l;
+    }
+
     /* public normalize(): void {
         if ((typeof this.car) === 'string'){};
     } */

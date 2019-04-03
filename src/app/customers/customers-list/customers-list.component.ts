@@ -23,6 +23,8 @@ export class CustomersListComponent implements OnInit {
     maxage = 100000;
     minHorsepower = 0;
     maxHorsepower = 100000;
+    numberCustomers = -111;
+    numberCustomersSort = -222;
 
     private static compareCarsByType(car1: Car, car2: Car): number {
         if (car1.type.trim().toLowerCase() < car2.type.trim().toLowerCase()) {
@@ -62,10 +64,14 @@ export class CustomersListComponent implements OnInit {
     getCustomersList(sortDirStr, minage, maxage) {
         // Use snapshotChanges().map() to store the key ////
         this.customerService.getCustomersList(sortDirStr, minage, maxage).subscribe(customers => {
-            this.customers = customers;
+            // this.customers = customers;
+            this.customers = customers.map(x => ({ ...x }));
+            //
+            // this.numberCustomers = Customer.myLength(this.customers);
             if (this.sortOrder === 'name') {
                 const sortDirNum = Number(this.sortDir);
                 this.customers.sort(function (a, b) {
+                    // this.numberCustomersSort++;
                     return sortDirNum *  CustomersListComponent.compareCustomersByName(a, b);
                 });
             }
@@ -102,9 +108,11 @@ export class CustomersListComponent implements OnInit {
     }
 
     public hhLength(): number {
-        // return -3;
+        return -3;
         // return this.customers.length;
         // return Customer.myLength(this.customers);
-        return Customer.myLength01(this.customers);
+        // return Customer.myLength01(this.customers);
+        // return Customer.myLength02(this.customers);
+        // return Customer.myLength03(this.customers);
     }
 }
