@@ -10,6 +10,8 @@ import {CustomerService} from '../customer.service';
 })
 export class CustomersListComponent implements OnInit {
 
+    // new Branch
+
     cars: Car[];
     carsCombined: Car[];
     customers: Customer[];
