@@ -66,6 +66,8 @@ export class CustomersListComponent implements OnInit {
         this.customerService.getCustomersList(sortDirStr, minage, maxage).subscribe(customers => {
             // this.customers = customers;
             this.customers = customers.map(x => ({ ...x }));
+            console.log('>>>>>>>>>>>>>>>>Anz Customers =' + this.customers.length +' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+            this.numberCustomers = this.customers.length;
             //
             // this.numberCustomers = Customer.myLength(this.customers);
             if (this.sortOrder === 'name') {
