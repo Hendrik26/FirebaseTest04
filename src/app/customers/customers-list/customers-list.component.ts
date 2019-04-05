@@ -101,10 +101,5 @@ export class CustomersListComponent implements OnInit {
         }
     }
 
-    public hhLength(): number {
-        // return -3;
-        // return this.customers.length;
-        // return Customer.myLength(this.customers);
-        return Customer.myLength01(this.customers);
-    }
+
 }
